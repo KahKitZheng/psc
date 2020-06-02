@@ -1,20 +1,25 @@
 # PSC
 
-For the course Platform, Sensors and Communication I needed to create an IoT thing for myself. So I created a mini weather station. It displays the temperature and humidity of my room on a 16x2 LCD display. Furthermore it can also fetch data from the [OpenWeather API](https://openweathermap.org/) and display that too. 
+For the course Platform, Sensors and Communication I needed to create an IoT thing for myself. So I created a mini weather station. It displays the temperature and humidity of my room on a 16x2 LCD display. Furthermore it can also fetch data from the [OpenWeather API](https://openweathermap.org/) and display that too.
 
---- 
+---
 
 ## Table of Contents
-  - [Prerequisities](#prerequisites)
+
+- [PSC](#psc)
+  - [Table of Contents](#table-of-contents)
+  - [Prerequisites](#prerequisites)
   - [Getting Started](#getting-started)
     - [Wiring](#wiring)
     - [NodeMCU Setup](#nodemcu-setup)
     - [Installing Libraries](#installing-libraries)
+    - [Known Issues](#known-issues)
   - [Built With](#built-with)
 
 ---
 
 ## Prerequisites
+
 | Parts needed                              | Amount |
 | :---------------------------------------- | -----: |
 | NodeMCU/ESP8266                           |     1x |
@@ -31,6 +36,7 @@ For the course Platform, Sensors and Communication I needed to create an IoT thi
 ## Getting Started
 
 ### Wiring
+
 ![Wiring finished](wire_setup.png)
 
 <br />
@@ -38,29 +44,33 @@ For the course Platform, Sensors and Communication I needed to create an IoT thi
 **LiquidCrystal LCD I2C display**
 
 The pins of the LiquidCrystal LCD display from top to bottom are: **GND**, **VCC**, **SDA** and **SCL**.
-  1. Connect the **GND** pin to the NodeMCU **GND** pin.
-  2. Connect the **VCC** pin to the NodeMCU **Vin** pin.
-  3. Connect the **SDA** pin to the NodeMCU **D2** pin.
-  4. Connect the **SCL** pin to the NodeMCU **D1** pin.
+
+1. Connect the **GND** pin to the NodeMCU **GND** pin.
+2. Connect the **VCC** pin to the NodeMCU **Vin** pin.
+3. Connect the **SDA** pin to the NodeMCU **D2** pin.
+4. Connect the **SCL** pin to the NodeMCU **D1** pin.
 
 <br />
 
 **DHT11 sensor**
 
 The pins of the DHT11 sensor from left to right are: **VCC**, **DATA**, **NC** (not connected) and **GND**.
+
 1. Connect the **VCC** pin to the NodeMCU **3.3V** pin.
 2. Connect the **DATA** pin to the NodeMCU **RX** pin.
-3. Connect the **GND** pin  to the NodeMCU **GND** pin.
+3. Connect the **GND** pin to the NodeMCU **GND** pin.
 
 <br />
 
 **Push Button**
+
 1. Connect one side of the push button to **GND**.
 2. Connect the other side of the push button to **D3**.
 
 ---
 
 ### NodeMCU Setup
+
 1. Open the Arduino IDE
 2. Go to `File` > `Preferences`.
 3. In the Settings tab you will find the label `Additional Boards Manager URLs`.
@@ -73,7 +83,9 @@ The pins of the DHT11 sensor from left to right are: **VCC**, **DATA**, **NC** (
 ---
 
 ### Installing Libraries
+
 **LiquidCrystal I2C**
+
 1. Open the Arduino IDE and go to `Tools` > `Manage Libraries…`.
 2. Search for the term `Liquid Crystal I2C`.
 3. Install the library named `LiquidCrystal I2c by Frank de Brabander`.
@@ -81,20 +93,35 @@ The pins of the DHT11 sensor from left to right are: **VCC**, **DATA**, **NC** (
 <br />
 
 **DHT11 Sensor**
+
 1. Open the Arduino IDE and go to `Tools` > `Manage Libraries…`.
 2. Search for the term `DHT`.
-3. Install the library with the name  `DHT sensor library by Adafruit`.
+3. Install the library with the name `DHT sensor library by Adafruit`.
 4. A popup will show up asking to install the necessary dependencies, select `Install all`.
 
 <br />
 
 **ArduinoJSON**
+
 1. Open the Arduino IDE and go to `Tools` > `Manage Libraries…`.
 2. Search for the term `ArduinoJSON`.
 3. Install the library named `ArduinoJson by Benoit Blanchon`. Make sure it is version 5.13.1.
 
 ---
 
+### Known Issues
+
+When you try to upload the sketch file to the NodeMCU. You may face the following error message:
+
+```
+esptool.FatalError: Timed out waiting for packet header.
+```
+
+A quick fix is to remove the three jumper wires beneath the DHT11 sensor before you upload the sketch file. After it is done uploading, you can plug those wires back in and everything should just work fine.
+
+---
+
 ## Built With
-* [Arduino](https://www.arduino.cc/) 
-* [OpenWeather](https://openweathermap.org/)
+
+- [Arduino](https://www.arduino.cc/)
+- [OpenWeather](https://openweathermap.org/)
